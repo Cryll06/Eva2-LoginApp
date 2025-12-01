@@ -2,6 +2,11 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="mi_color_boton">#03A9F4</color>
 
+    <color name="primary">#1565C0</color>
+    <color name="primary_dark">#0D47A1</color>
+    <color name="accent">#42A5F5</color>
+
+    <color name="background_light">#F5F5F5</color>
+    <color name="gray_text">#757575</color>
 </resources>

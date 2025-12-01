@@ -1,5 +1,6 @@
 package com.dorian.eva2
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -7,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.dorian.eva2.databinding.ActivityNoticiasBinding
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 
 class NoticiasActivity : AppCompatActivity() {
 
@@ -18,6 +20,14 @@ class NoticiasActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityNoticiasBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+
+        binding.btnLogoutToolbar.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
+            finish()
+        }
 
         setupRecyclerView()
         fetchNoticias()
@@ -34,7 +44,7 @@ class NoticiasActivity : AppCompatActivity() {
 
     private fun fetchNoticias() {
         firestoreDb.collection("noticias_chile")
-            .orderBy("fecha", com.google.firebase.firestore.Query.Direction.DESCENDING)
+            .orderBy("fecha", Query.Direction.DESCENDING)
             .get()
             .addOnSuccessListener { result ->
                 val fetchedNoticias = mutableListOf<Noticia>()
